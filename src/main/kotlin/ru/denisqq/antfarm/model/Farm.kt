@@ -1,6 +1,7 @@
 package ru.denisqq.antfarm.model
 
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.OneToOne
 
 @Entity
