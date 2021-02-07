@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 
---changeset tretyakov-da:2021027-01 failOnError:true
+--changeset tretyakov-da:2021027-01 failOnError:true runAlways:true
 --comment: Какие-то тестовые фермы
 --validCheckSum: ANY
 --preconditions onFail:MARK_RAN onError:HALT
