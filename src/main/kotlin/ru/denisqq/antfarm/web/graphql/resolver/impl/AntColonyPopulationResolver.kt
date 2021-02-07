@@ -5,5 +5,4 @@ import org.springframework.stereotype.Component
 import ru.denisqq.antfarm.model.AntColonyPopulation
 
 @Component
-class AntColonyPopulationResolver: GraphQLResolver<AntColonyPopulation> {
-}
+class AntColonyPopulationResolver : GraphQLResolver<AntColonyPopulation>

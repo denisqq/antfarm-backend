@@ -11,6 +11,6 @@ class FarmQueryResolverImpl(val service: FarmService, val mapper: FarmMapper) : 
 
     override fun farms(): Collection<Farm> {
         val farms = service.findAll()
-        return farms.toList();
+        return farms.toList()
     }
 }

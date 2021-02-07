@@ -4,5 +4,4 @@ import org.mapstruct.Mapper
 import ru.denisqq.antfarm.model.AntColonyPopulation
 
 @Mapper
-interface AntColonyPopulationUpdateMapper: UpdateMapper<AntColonyPopulation> {
-}
+interface AntColonyPopulationUpdateMapper : UpdateMapper<AntColonyPopulation>

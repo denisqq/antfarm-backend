@@ -11,6 +11,4 @@ import ru.denisqq.antfarm.service.mapper.AntColonyPopulationUpdateMapper
 class AntColonyPopulationServiceImpl(
     repository: AntColonyPopulationRepository,
     updateMapper: AntColonyPopulationUpdateMapper
-) : AbstractAntfermService<AntColonyPopulation, QAntColonyPopulation, AntColonyPopulationRepository, AntColonyPopulationUpdateMapper>(repository, updateMapper),AntColonyPopulationService {
-
-}
+) : AbstractAntfermService<AntColonyPopulation, QAntColonyPopulation, AntColonyPopulationRepository, AntColonyPopulationUpdateMapper>(repository, updateMapper), AntColonyPopulationService

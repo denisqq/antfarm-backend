@@ -24,4 +24,5 @@ class User(
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     var avatar: Avatar
+
 ) : AbstractAuditable()

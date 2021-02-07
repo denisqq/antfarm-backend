@@ -12,7 +12,7 @@ import ru.denisqq.antfarm.web.mapper.AntColonyPopulationMapper
 class ColonyResolverImpl(val antColonyPopulationService: AntColonyPopulationService, val antColonyPopulationMapper: AntColonyPopulationMapper) : GraphQLResolver<Colony> {
 
     fun getAntColonyPopulation(colony: Colony): Collection<AntColonyPopulation> {
-        val predicate = QAntColonyPopulation.antColonyPopulation.colony.eq(colony);
+        val predicate = QAntColonyPopulation.antColonyPopulation.colony.eq(colony)
         val population = antColonyPopulationService.findByRequest(
             predicate
         )
