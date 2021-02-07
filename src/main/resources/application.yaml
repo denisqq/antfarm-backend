@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:default} #Вроде как не надо, SPRING_PROFILE_ACTIVE и так выставляется
+  datasource:
+    url: ${DS_URL:jdbc:postgresql://127.0.0.1:5432/db_antfarm}
+    username: ${DS_USERNAME:antfarm}
+    password: ${DS_PASSWORD:antfarm}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      #описание свойств: https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby
+      poolName: HikariPool-app
+      minimum-idle: 6
+      maximum-pool-size: 100
+      connection-timeout: 50000
+      idle-timeout: 60000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: antfarm
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        validator:
+          apply_to_ddl: false
+  liquibase:
+    enabled: false
+server:
+  port: 8080
+
+antfarm:
+  liquibase:
+    changeLog: "db/changelog/db.changelog-master-develop.yml"
+    mode: DEV
+  provider:
+    vk:
+      api-secret: ${VK_API_SECRET:1234}
+
+
+graphql:
+  servlet:
+    mapping: /api/v1/private/graphql
+graphiql:
+  endpoint: /api/v1/private/graphql
+  mapping: /graphiql
+
+logging:
+  level:
+    org.hibernate: info
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
+    com.zaxxer.hikari.HikariConfig: debug
+    com.zaxxer.hikari.pool.HikariPool: debug

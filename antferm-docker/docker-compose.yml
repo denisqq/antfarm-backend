@@ -1,0 +1,35 @@
+version: "3"
+
+networks:
+  antfarm-infrastructure-network:
+    driver: bridge
+
+services:
+
+  postgres:
+    image: postgres:12-alpine
+    container_name: postgres-antfarm
+    environment:
+      POSTGRES_DB: ${PG_DB_NAME}
+      POSTGRES_USER: ${PG_DB_USER}
+      POSTGRES_PASSWORD: ${PG_DB_PWD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - antfarm-infrastructure-network
+  antfarm:
+    image: ant-ferm:0.0.1-SNAPSHOT
+    environment:
+      DS_URL: ${DB_URL}
+      DS_USERNAME: ${DB_USERNAME}
+      DS_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - antfarm-infrastructure-network

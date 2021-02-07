@@ -1,0 +1,28 @@
+type Query {
+  farms: [Farm]
+}
+
+type Farm {
+  id: String!
+  colony: Colony!
+}
+
+type Colony {
+  population: Int!
+  antColonyPopulation: [AntColonyPopulation]
+}
+
+type AntColonyPopulation {
+  population: Int!
+  ant: Ant!
+}
+
+type Ant {
+  id: String!,
+  antType: AntType!,
+  name: String!,
+}
+
+enum AntType {
+  BIG_MOTHER, SLAVE, GUARD
+}
