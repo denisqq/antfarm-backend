@@ -1,0 +1,53 @@
+type Farm {
+  id: String!
+  colony: Colony!
+}
+
+type Colony {
+  population: Int!
+  antColonyPopulation: [AntColonyPopulation]
+}
+
+type AntColonyPopulation {
+  id: String!
+  population: Int!
+  ant: Ant!
+}
+
+type Ant {
+  id: String!,
+  antType: AntType!,
+  name: String!,
+}
+
+
+type MarketProduct {
+  id: String!,
+  quantity: Int!,
+  product: Product!,
+  marketProductPrices: [MarketProductPrice]
+}
+
+type Product {
+  id: String!,
+  name: String!,
+  type: ProductType!,
+  ant: Ant
+}
+
+type MarketProductPrice {
+  price: Float,
+  currency: Currency
+}
+
+enum AntType {
+  BIG_MOTHER, SLAVE, GUARD
+}
+
+enum ProductType {
+  ANT
+}
+
+enum Currency {
+  MONEY
+}

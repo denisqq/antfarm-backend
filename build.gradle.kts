@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-
 plugins {
 //    id("java")
     id("org.springframework.boot") version "2.4.2"
@@ -51,8 +48,8 @@ dependencies {
 //    //Graphql
     implementation ("com.graphql-java:graphql-java-tools:$graphQLJavaToolVersion")
     implementation ("com.graphql-java:graphql-spring-boot-starter:$graphQLSpringBootVersion")
-    implementation ("com.graphql-java:graphiql-spring-boot-starter:$graphQLSpringBootVersion")
-    implementation ("com.graphql-java:voyager-spring-boot-starter:$graphQLSpringBootVersion")
+    implementation("com.graphql-java:graphiql-spring-boot-starter:$graphQLSpringBootVersion")
+    implementation("com.graphql-java:voyager-spring-boot-starter:$graphQLSpringBootVersion")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -60,6 +57,8 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.liquibase:liquibase-core:3.10.2")
     implementation("com.vladmihalcea:hibernate-types-52:$hibernateTypesVersion")
+
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.2")
 
 //    implementation("com.vk.api:sdk:$vkSdkVersion") - подключить логгер
 
@@ -76,13 +75,6 @@ dependencies {
 //    testImplementation("org.springframework.security:spring-security-test")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
-        jvmTarget = "11"
-    }
-
-}
 
 kapt {
     correctErrorTypes = true
@@ -94,4 +86,25 @@ kapt {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+tasks {
+    processResources {
+        dependsOn("copyGraphqlScheme")
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
+            jvmTarget = "11"
+        }
+    }
+
+    register("copyGraphqlScheme") {
+        copy {
+            from("./antferm-graphql-schema") {
+                include("*.graphqls")
+            }
+            into("$buildDir/resources/main")
+        }
+    }
 }

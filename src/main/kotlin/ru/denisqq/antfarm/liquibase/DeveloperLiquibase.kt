@@ -15,6 +15,7 @@ import javax.sql.DataSource
 @Profile("!prod") //Обвязка для ликви, для запуска после того как отработает гибер, включаем только для dev
 class DeveloperLiquibase(private val dataSource: DataSource) {
 
+
     @Value("\${antfarm.liquibase.mode}")
     private lateinit var mode: LiquibaseMode
 
@@ -29,7 +30,6 @@ class DeveloperLiquibase(private val dataSource: DataSource) {
     }
 
     private fun updateDevData() {
-        val debugStr = "updateDevData"
         //        log.info("{}: start", debugStr);
         try {
             dataSource.connection.use { c ->
